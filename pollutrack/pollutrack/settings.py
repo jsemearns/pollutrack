@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profile',
     'images',
+    'pollution',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -126,8 +127,11 @@ try:
     from local_settings import *
 except:
     pass
+<<<<<<< Updated upstream
 
 PROFILE_IMAGE_UPLOAD_PATH = 'profile/image'
 PROFILE_COVER_UPLOAD_PATH = 'profile/cover'
 
 IMAGE_UPLOAD_PATH = 'uploaded_images'
+=======
+>>>>>>> Stashed changes
