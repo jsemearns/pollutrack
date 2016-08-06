@@ -23,7 +23,8 @@ class ListPollutionSources(View):
         bottom = request.GET.get('bottom', 30)
         result = []
 
-        reports = self.model.objects.filter(**filters)[top:bottom]
+        reports = self.model.objects.filter(**filters).order_by(
+            '-when')[top:bottom]
         for report in reports:
             center = report.center;
             result.append({
