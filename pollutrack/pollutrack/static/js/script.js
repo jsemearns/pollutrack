@@ -63,7 +63,6 @@ function showPollutionInfo(id) {
 }
 
 function createPollution(position) {
-    console.log(position);
     var imageIds = [];
     $('#create-pollution').html(templates.createForm);
     var mainForm = $('#pollution-form');
