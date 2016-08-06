@@ -2,7 +2,7 @@ var MAP;
 var marker = {
     position: {lat: 10.3267959, lng: 123.9108368}
 };
-var Geocoder = new google.maps.Geocoder();
+// var Geocoder = new google.maps.Geocoder();
 
 var templates = {
     pollutionDetail: $('#pollution-detail-template').html(),
