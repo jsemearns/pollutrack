@@ -1,5 +1,6 @@
 body {
     margin: 0px;
+    color: #333;
 }
 
 li {
@@ -38,4 +39,17 @@ li {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.details {
+    margin: 5px;
+}
+
+.material-icons {
+    width: 24px;
+    margin: 0px 10px;
+}
+
+.with-icon span {
+    vertical-align: 4px;
 }
