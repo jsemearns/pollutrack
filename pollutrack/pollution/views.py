@@ -22,13 +22,14 @@ class ListPollutionSources(View):
 
         reports = self.model.objects.filter(**filters)[top:bottom]
         for report in reports:
-            center = self.center;
+            center = report.center;
             result.append({
                 'image_url': report.image_url,
                 'long': center.longitude,
                 'lat': center.latitude,
                 'address': report.address,
-                'approve_count': report.user_approved.count()
+                'approve_count': report.user_approved.count(),
+                'pk': report.pk,
                 })
         return HttpResponse(json.dumps(result))
 
@@ -45,7 +46,7 @@ class GetPollutionSources(View):
 
         report = self.model.objects.filter(**filters).first()        
         if report:
-            center = self.center;
+            center = report.center;
             result = {
                 'after_image_urls': report.image_url,
                 'image_urls': report.image_urls,
