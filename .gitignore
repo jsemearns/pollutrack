@@ -2,3 +2,4 @@
 pt/
 *.sqlite3
 */storage/*
+.DS_Store
