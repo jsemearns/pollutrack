@@ -22,4 +22,4 @@ from pollutrack import views
 urlpatterns = [
     url(r'^$', views.HomePage.as_view()),
     url(r'^admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
