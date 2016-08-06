@@ -1,3 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+from event.models import Event, Freebie
+
+
+class EventAdmin(admin.ModelAdmin):
+    model = Event
+    list_display = ('slogan', 'owner',)
+
+
+admin.site.register(Event, EventAdmin)
+admin.site.register(Freebie)
