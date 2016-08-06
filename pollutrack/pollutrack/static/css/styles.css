@@ -157,9 +157,23 @@ li {
     color: #333;
 }
 
-.close {
+.close, .close2 {
     position: absolute;
     right: 10px;
+}
+
+.close2 {
+    top: 10px;
+}
+
+.close2 a {
+    height: 24px;
+    line-height: 24px;
+    background-color: rgba(255, 255, 255, 0.8)
+}
+
+.close2 a:hover {
+    background-color: rgba(255, 255, 255, 0.9)
 }
 
 @media (min-width: 993px) {

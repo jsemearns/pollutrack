@@ -1,5 +1,10 @@
 {% verbatim %}
 <script id="pollution-detail-template" type="x-tmpl-mustache">
+    <div class="close2">
+        <a class="no-padding close-detail" href="#" data-activates="detail-slide">
+            <i class="material-icons no-margin">close</i>
+        </a>
+    </div>
     <div class="background detail-image" style="background-image: url({{ image_urls.0 }})"></div>
     <div class="details">
         <div class="with-icon">
