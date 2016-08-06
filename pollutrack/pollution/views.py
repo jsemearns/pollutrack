@@ -62,7 +62,8 @@ class GetPollutionSources(View):
                     'full_name': report.owner.get_full_name(),
                     'profile_image_url':
                     report.owner.profile.profile_image_url,
-                }
+                },
+                'when': report.when.strftime('%b %d, %Y')
 
             }
             return HttpResponse(json.dumps(result))
