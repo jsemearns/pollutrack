@@ -7,6 +7,8 @@ class Coordinates(models.Model):
     longitude = models.FloatField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
 
+    class Meta:
+        app_label = 'pollution'
 
 class PollutionSource(models.Model):
     radius = models.FloatField(blank=True, null=True)
@@ -15,10 +17,16 @@ class PollutionSource(models.Model):
     center = models.OneToOneField(Coordinates, related_name='source')
     victim_count = models.PositiveIntegerField(blank=True, null=True)
 
+    class Meta:
+        app_label = 'pollution'
+
 
 class Victim(models.Model):
     pollution = models.ForeignKey(PollutionSource, related_name='victims')
     images = models.ManyToManyField(ImageUploads)
+
+    class Meta:
+        app_label = 'pollution'
 
 
 class Disease(models.Model):
@@ -26,3 +34,6 @@ class Disease(models.Model):
     description = models.TextField(blank=True, null=True)
     pollution = models.ManyToManyField(PollutionSource)
     images = models.ManyToManyField(ImageUploads)
+
+    class Meta:
+        app_label = 'pollution'
