@@ -5,6 +5,7 @@ var marker = {
 
 var templates = {
     pollutionDetail: $('#pollution-detail-template').html(),
+    pollutionList: $('#pollution-list-template').html(),
 }
 
 function initMap() {
@@ -33,12 +34,15 @@ function addAllMarkers(sources) {
 }
 
 function fetchPollutions() {
+    var listContainer = $('.pollution-list');
     $.get('/pollution/list/', function(data) {
         var pollutions = JSON.parse(data);
         for (var i=0; i < pollutions.length; i++) {
             var loc = pollutions[i];
             addMarker({position: {lat: loc.lat, lng: loc.long},
                        pk: loc.pk});
+            var t = Mustache.render(templates.pollutionList, loc)
+            listContainer.append(t);
         }
     });
 }

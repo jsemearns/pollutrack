@@ -1,0 +1,16 @@
+{% verbatim %}
+<script id="pollution-list-template" type="x-tmpl-mustache">
+    <li class="collection-item">
+        <div class="banner" style="background-image: url({{ image_url }})"></div>
+        <div class="details">
+            <div class="address">{{ address }}</div>
+            <div class="italic">{{ approve_count }} people approved this.</div>
+            <div class="marker">
+                <a href="#">
+                    <i class="material-icons">location_on</i>
+                </a>
+            </div>
+        </div>
+    </li>
+</script>
+{% endverbatim %}
