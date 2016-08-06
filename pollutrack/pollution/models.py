@@ -16,6 +16,7 @@ class PollutionSource(models.Model):
     description = models.TextField(blank=True, null=True)
     center = models.OneToOneField(Coordinates, related_name='source')
     victim_count = models.PositiveIntegerField(blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'pollution'
