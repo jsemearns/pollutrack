@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from images.models import ImageUploads
 
@@ -51,6 +52,10 @@ class PollutionSource(models.Model):
         if first:
             return first.url
         return ''
+
+    @property
+    def approve_url(self):
+        return reverse('approve-pollution')
 
     class Meta:
         app_label = 'pollution'

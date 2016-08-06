@@ -1,4 +1,5 @@
 var MAP;
+var Geocoder;
 var marker = {
     position: {lat: 10.3267959, lng: 123.9108368}
 };
@@ -10,7 +11,7 @@ var templates = {
     pollutionDetail: $('#pollution-detail-template').html(),
     pollutionList: $('#pollution-list-template').html(),
     createForm: $('#create-pollution').html(),
-}
+};
 
 function initMap() {
     var mapDiv = document.getElementById('map');
@@ -27,7 +28,7 @@ function addMarker(source) {
     source.map = MAP;
     var marker = new google.maps.Marker(source);
     marker.addListener('click', function() {
-        showPollutionInfo(this.pk)
+        showPollutionInfo(this.pk);
     });
 }
 
@@ -45,7 +46,7 @@ function fetchPollutions() {
             var loc = pollutions[i];
             addMarker({position: {lat: loc.lat, lng: loc.long},
                        pk: loc.pk});
-            var t = Mustache.render(templates.pollutionList, loc)
+            var t = Mustache.render(templates.pollutionList, loc);
             listContainer.append(t);
         }
     });
@@ -116,8 +117,10 @@ function createPollution(position) {
 $('.show-detail').sideNav({
     menuWidth: 320,
     edge: 'left',
-    closeOnClick: false,
+    closeOnClick: true,
 });
+
+$('.close-detail').sideNav('hide');
 
 $('.show-list').sideNav({
     menuWidth: 320,
@@ -152,6 +155,46 @@ function getUserPosition(success, error) {
     return navigator.geolocation.getCurrentPosition(success, error);
 }
 
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+$(document).on('click', '#approve-btn', function(e) {
+    e.preventDefault();
+    var elem = $(this);
+    $.ajax({
+        beforeSend: function(xhr, settings) {
+            var csrftoken = getCookie('csrftoken');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        },
+        type: 'POST',
+        url: elem.data('url'),
+        data: {'pk': elem.data('id')},
+        success: function(response) {
+            response = JSON.parse(response);
+            if (response.update) {
+                $('#approve-count').text(response.count.toString().concat(' people verified this.'));
+            }
+        },
+        error: function(xhr, type) {
+            console.log('an unexpected error occured while approving');
+        }
+    });
+});
+
 function getCoordinates(location, callback) {
     Geocoder.geocode({'location': location}, function(results, status) {
       if (status === 'OK') {
@@ -162,3 +205,9 @@ function getCoordinates(location, callback) {
         }
     });
 }
+
+// FOR THE IMAGES MODAL-CAROUSEL
+$('#detail-slide').on('click', '.detail-image', function() {
+    $('#images-modal').openModal();
+    $('.carousel').carousel();
+});

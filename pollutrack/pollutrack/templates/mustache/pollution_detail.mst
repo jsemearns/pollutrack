@@ -1,26 +1,32 @@
 {% verbatim %}
 <script id="pollution-detail-template" type="x-tmpl-mustache">
+    <div class="close2">
+        <a class="no-padding close-detail" href="#" data-activates="detail-slide">
+            <i class="material-icons no-margin">close</i>
+        </a>
+    </div>
     <div class="background detail-image" style="background-image: url({{ image_urls.0 }})"></div>
     <div class="details">
         <div class="with-icon">
-            <i class="material-icons">perm_identity</i>
+            <i class="material-icons person">perm_identity</i>
             <span>{{ owner.full_name }}</span>
         </div>
         <div class="with-icon">
-            <i class="material-icons">location_on</i>
+            <i class="material-icons location">location_on</i>
             <span>{{ address }}</span>
         </div>
         <div class="with-icon">
-            <i class="material-icons">today</i>
+            <i class="material-icons date">today</i>
             <span>{{ when }}</span></div>
         <div class="with-icon">
-            <i class="material-icons">thumb_up</i>
-            <span>{{ approve_count }} people verified this.</span>
+            <button id="approve-btn" data-id={{ pk }} data-url={{ approve_url }}><i class="material-icons" >thumb_up</i></button>
+            <span id="approve-count">{{ approve_count }} people verified this.</span>
         </div>
         <div class="divider"></div>
         <p class="">
             {{ description }}
         </p>
     </div>
+    <div class="footer"></div>
 </script>
 {% endverbatim %}
