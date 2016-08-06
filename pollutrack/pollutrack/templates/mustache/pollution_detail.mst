@@ -15,7 +15,7 @@
             <span>{{ when }}</span></div>
         <div class="with-icon">
             <i class="material-icons">thumb_up</i>
-            <span>{{ approve_count }} people approved this.</span>
+            <span>{{ approve_count }} people verified this.</span>
         </div>
         <div class="divider"></div>
         <p class="">
