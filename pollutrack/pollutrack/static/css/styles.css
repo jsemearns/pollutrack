@@ -54,6 +54,19 @@ li {
     overflow-x: hidden;
 }
 
+.side-menu .marker a {
+    margin: 0px;
+    padding: 0px;
+}
+
+.side-menu .marker a:hover {
+    background: none;
+}
+
+.side-menu .marker i {
+    color: #DD2C00;
+}
+
 .over {
     z-index: 2;
     position: fixed;
