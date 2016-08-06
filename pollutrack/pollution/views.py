@@ -4,7 +4,7 @@ from django.views.generic import View, TemplateView
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from pollution.models import PollutionSource
+from pollution.models import PollutionSource, Coordinates
 from pollution.forms import PollutionSourceForm
 
 
@@ -73,7 +73,6 @@ class GetPollutionSources(View):
 
 class CreatePollutionSource(TemplateView):
     template_name = 'pollution/create.html'
-    form_class = PollutionSourceForm
 
     def get_context_data(self, **kwargs):
         context = super(CreatePollutionSource, self).get_context_data(**kwargs)
@@ -82,12 +81,15 @@ class CreatePollutionSource(TemplateView):
         return context
 
     def post(self, request):
-        form = self.form_class(request.POST)
-        image_pks = self.request.POST.getlist('image_pks')
-
-        if form.is_valid():
-            pol = form.save()
-            if image_pks:
-                pol.images.add(*image_pks)
+        center = Coordinates.objects.create(
+            longitude=request.POST['long'],
+            latitude=request.POST['lat'])
+        pol = PollutionSource.objects.create(
+            owner=request.user, center=center, address=request.POST['address'],
+            description=request.POST['description'])
+        image_pks = self.request.POST['image_pks']
+        image_pks = image_pks.split(',')
+        if len(image_pks) > 0:
+            pol.images.add(*image_pks)
             return HttpResponse()
         return HttpResponse('form error', status=403)

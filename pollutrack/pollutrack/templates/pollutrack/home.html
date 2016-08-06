@@ -40,9 +40,12 @@
         <a href="#" data-activates="detail-slide" class="show-detail hidden"></a>
 
         <!-- ADD BUTTON -->
-        <div class="circle red add-button">
-            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons no-margin">add</i></a>
-        </div>
+        {% if user.is_authenticated %}
+            <div class="circle red add-button">
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons no-margin">add</i></a>
+            </div>
+            {% include 'pollutrack/create_pollution.html' %}
+        {% endif %}
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>

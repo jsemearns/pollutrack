@@ -1,3 +1,5 @@
+import json
+
 from django.views.generic import View, TemplateView
 from django.http import HttpResponse
 
@@ -15,7 +17,7 @@ class UploadImage(LoginRequiredMixin, TemplateView):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             i = form.save()
-            return HttpResponse(i.pk)
+            return HttpResponse(json.dumps({'pk': i.pk, 'url': i.url}))
         return HttpResponse('invalid file', status=403)
 
         
