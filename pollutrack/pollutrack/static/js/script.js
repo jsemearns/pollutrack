@@ -11,6 +11,7 @@ var templates = {
     pollutionDetail: $('#pollution-detail-template').html(),
     pollutionList: $('#pollution-list-template').html(),
     createForm: $('#create-pollution').html(),
+    imagesCarousel: $('#pollution-images-template').html(),
 };
 
 function initMap() {
@@ -56,6 +57,8 @@ function showPollutionInfo(id) {
     $.get('/pollution/get/?pk=' + id, function(data) {
         var pollution = JSON.parse(data);
         var t = Mustache.render(templates.pollutionDetail, pollution);
+        $('.carousel').removeClass('initialized');
+        $('.carousel').html(Mustache.render(templates.imagesCarousel, pollution));
         $('.show-detail').sideNav('hide');
         $('#detail-slide').html(t);
         $('.show-detail').sideNav('show');
@@ -79,7 +82,7 @@ function createPollution(position) {
             url: form.attr('action'),  //server script to process data
             type: 'POST',
             success: function(data) {
-                var data = JSON.parse(data);    
+                var data = JSON.parse(data);
                 imageIds.push(data.pk);
                 $('#create-pollution .uploaded-images').append(
                     '<img src="' + data.url + '">')
@@ -145,7 +148,7 @@ $('.add-button').on('click', function(e) {
             createPollution);
     }, function(e) {
         console.log(e);
-        Materialize.toast('Sorry, we cannot get your current location. :(', 
+        Materialize.toast('Sorry, we cannot get your current location. :(',
             4000);
     });
     // createPollution();
