@@ -50,8 +50,9 @@ class GetPollutionSources(View):
         if report:
             center = report.center;
             result = {
-                'after_image_urls': report.image_url,
+                'first_image_url': report.image_url,
                 'image_urls': report.image_urls,
+                'after_image_urls': report.after_image_urls,
                 'long': center.longitude,
                 'lat': center.latitude,
                 'address': report.address,
