@@ -1,0 +1,26 @@
+{% verbatim %}
+<script id="pollution-detail-template" type="x-tmpl-mustache">
+    <div class="background detail-image" style="background-image: url({{ image_urls.0 }})"></div>
+    <div class="details">
+        <div class="with-icon">
+            <i class="material-icons">perm_identity</i>
+            <span>{{ owner.full_name }}</span>
+        </div>
+        <div class="with-icon">
+            <i class="material-icons">location_on</i>
+            <span>{{ address }}</span>
+        </div>
+        <div class="with-icon">
+            <i class="material-icons">today</i>
+            <span>{{ when }}</span></div>
+        <div class="with-icon">
+            <i class="material-icons">thumb_up</i>
+            <span>{{ approve_count }} people approved this.</span>
+        </div>
+        <div class="divider"></div>
+        <p class="">
+            {{ description }}
+        </p>
+    </div>
+</script>
+{% endverbatim %}

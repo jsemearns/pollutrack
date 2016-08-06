@@ -30,28 +30,7 @@
 
         <!-- TEMPLATE FOR DETAIL -->
         <div id="detail-slide" class="side-nav">
-            <div class="background detail-image" style="background-image: url(https://upload.wikimedia.org/wikipedia/en/b/b1/Olympic_Rings.svg)"></div>
-            <div class="details">
-                <div class="with-icon">
-                    <i class="material-icons">perm_identity</i>
-                    <span>Eman Mearns</span>
-                </div>
-                <div class="with-icon">
-                    <i class="material-icons">location_on</i>
-                    <span>Banilad Cebu</span>
-                </div>
-                <div class="with-icon">
-                    <i class="material-icons">today</i>
-                    <span>Aug. 6, 2016</span></div>
-                <div class="with-icon">
-                    <i class="material-icons">thumb_up</i>
-                    <span>88 people approved this.</span>
-                </div>
-                <div class="divider"></div>
-                <p class="">
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                </p>
-            </div>
+            {% include 'mustache/pollution_detail.mst' %}
         </div>
         <a href="#" data-activates="detail-slide" class="show-detail hidden"></a>
 
@@ -59,6 +38,7 @@
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQqjDYm9kO9NJLapj7URhEb4HvZW07WUI&callback=initMap">
         </script>
+        <script type="text/javascript" src="{% static 'js/mustache.min.js' %}"></script>
         <script src="{% static 'js/script.js' %}"></script>
     </body>
 </html>
