@@ -2,7 +2,40 @@ body {
     margin: 0px;
 }
 
+li {
+    list-style: none;
+}
+
 #map {
+    position: absolute;
     width: 100%;
     height: 100vh;
+}
+
+#sidenav-overlay {
+    display: none;
+}
+
+.side-menu {
+    z-index: 2;
+    position: fixed;
+    width: 320px;
+    background: #fff;
+    height: 100vh;
+}
+
+.over {
+    z-index: 2;
+    position: fixed;
+}
+
+.drag-target {
+    display: none;
+}
+
+.detail-image {
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
