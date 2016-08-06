@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'profile',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,6 +69,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pollutrack.wsgi.application'
+
+MEDIA_ROOT = 'storage/'
+
+PROFILE_IMAGE_UPLOAD_PATH = 'profile/image'
+PROFILE_COVER_UPLOAD_PATH = 'profile/cover'
 
 
 # Database
@@ -118,3 +124,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from local_settings import *
+except:
+    pass
