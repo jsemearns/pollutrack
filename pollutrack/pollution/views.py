@@ -3,8 +3,9 @@ import json
 from django.views.generic import View, TemplateView
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
-from pollution.models import PollutionSource
+from pollution.models import PollutionSource, Coordinates
 from pollution.forms import PollutionSourceForm
 
 
@@ -22,7 +23,8 @@ class ListPollutionSources(View):
         bottom = request.GET.get('bottom', 30)
         result = []
 
-        reports = self.model.objects.filter(**filters)[top:bottom]
+        reports = self.model.objects.filter(**filters).order_by(
+            '-when')[top:bottom]
         for report in reports:
             center = report.center;
             result.append({
@@ -50,6 +52,7 @@ class GetPollutionSources(View):
         if report:
             center = report.center;
             result = {
+                'pk': report.pk,
                 'first_image_url': report.image_url,
                 'image_urls': report.image_urls,
                 'after_image_urls': report.after_image_urls,
@@ -64,8 +67,8 @@ class GetPollutionSources(View):
                     'profile_image_url':
                     report.owner.profile.profile_image_url,
                 },
-                'when': report.when.strftime('%b %d, %Y')
-
+                'when': report.when.strftime('%b %d, %Y'),
+                'approve_url': report.approve_url
             }
             return HttpResponse(json.dumps(result))
         else:
@@ -74,7 +77,6 @@ class GetPollutionSources(View):
 
 class CreatePollutionSource(TemplateView):
     template_name = 'pollution/create.html'
-    form_class = PollutionSourceForm
 
     def get_context_data(self, **kwargs):
         context = super(CreatePollutionSource, self).get_context_data(**kwargs)
@@ -83,12 +85,35 @@ class CreatePollutionSource(TemplateView):
         return context
 
     def post(self, request):
-        form = self.form_class(request.POST)
-        image_pks = self.request.POST.getlist('image_pks')
-
-        if form.is_valid():
-            pol = form.save()
-            if image_pks:
-                pol.images.add(*image_pks)
+        center = Coordinates.objects.create(
+            longitude=request.POST['long'],
+            latitude=request.POST['lat'])
+        pol = PollutionSource.objects.create(
+            owner=request.user, center=center, address=request.POST['address'],
+            description=request.POST['description'])
+        image_pks = self.request.POST['image_pks']
+        image_pks = image_pks.split(',')
+        if len(image_pks) > 0:
+            pol.images.add(*image_pks)
             return HttpResponse()
         return HttpResponse('form error', status=403)
+
+
+class AddApproval(View):
+    model = PollutionSource
+
+    def post(self, request):
+        if request.is_ajax():
+            print 'here'
+            pk = self.request.POST.get('pk', None)
+            response = {}
+            response['update'] = False
+            if pk:
+                user = self.request.user
+                source = self.model.objects.get(pk=pk)
+                if not source.user_approved.filter(pk=user.pk).exists():
+                    source.user_approved.add(user)
+                    response['count'] = source.user_approved.count()
+                    response['update'] = True
+            return HttpResponse(json.dumps(response))
+        return HttpResponse(status=403)

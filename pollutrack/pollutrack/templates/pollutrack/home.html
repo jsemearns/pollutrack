@@ -4,7 +4,7 @@
 <html>
     <head>
         <title>PolluTrack</title>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -55,9 +55,12 @@
         </div>
 
         <!-- ADD BUTTON -->
-        <div class="circle red add-button">
-            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons no-margin">add</i></a>
-        </div>
+        {% if user.is_authenticated %}
+            <div class="circle red add-button">
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons no-margin">add</i></a>
+            </div>
+            {% include 'pollutrack/create_pollution.html' %}
+        {% endif %}
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>

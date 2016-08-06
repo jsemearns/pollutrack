@@ -4,9 +4,13 @@ var marker = {
     position: {lat: 10.3267959, lng: 123.9108368}
 };
 
+var userLocation = null;
+var Geocoder = null;
+
 var templates = {
     pollutionDetail: $('#pollution-detail-template').html(),
     pollutionList: $('#pollution-list-template').html(),
+    createForm: $('#create-pollution').html(),
 };
 
 function initMap() {
@@ -16,7 +20,6 @@ function initMap() {
         disableDefaultUI: true,
         zoom: 12,
     });
-
     Geocoder = new google.maps.Geocoder();
     fetchPollutions();
 }
@@ -59,6 +62,58 @@ function showPollutionInfo(id) {
     });
 }
 
+function createPollution(position) {
+    console.log(position);
+    var imageIds = [];
+    $('#create-pollution').html(templates.createForm);
+    var mainForm = $('#pollution-form');
+    mainForm.find('input[name="long"]').val(position.lng)
+    mainForm.find('input[name="lat"]').val(position.lat)
+    mainForm.find('input[name="address"]').val(position.address);
+    $('#create-pollution').openModal();
+    $('#create-pollution input[name="image_file"]').on('change', function(e) {
+        var form = $(this).closest('form');
+        var formData = new FormData(form[0]);
+        formData.append('file', this.files[0]);
+        $.ajax({
+            url: form.attr('action'),  //server script to process data
+            type: 'POST',
+            success: function(data) {
+                var data = JSON.parse(data);    
+                imageIds.push(data.pk);
+                $('#create-pollution .uploaded-images').append(
+                    '<img src="' + data.url + '">')
+                mainForm.find('input[name="image_pks"]').val(imageIds);
+            },
+            error: function(xhr) {
+                alert("Something went wrong!");
+            },
+            // Form data
+            data: formData,
+            processData: false,
+            contentType: false,
+        });
+    });
+
+    mainForm.on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+           type: "POST",
+           url: this.action,
+           data: $(this).serialize(), // serializes the form's elements.
+           success: function(data) {
+                $('#create-pollution').closeModal();
+                Materialize.toast(
+                    'We received your report and currently verifying it. Thank you!', 4000)
+           }
+         });
+    });
+
+    $('#create-pollution .submit').on('click', function(e) {
+        mainForm.trigger('submit');
+    });
+}
+
 $('.show-detail').sideNav({
     menuWidth: 320,
     edge: 'left',
@@ -82,32 +137,73 @@ $('.pollution-list').on('click', 'li.collection-item', function(e) {
     showPollutionInfo(elem.data('pk'));
 });
 
-function getUserPosition() {
-    var startPos;
-    var geoSuccess = function(position) {
-        startPos = position;
-        return { 'lng': startPos.coords.longitude, 'lat': startPos.coords.latitude };
-    };
-    var geoError = function(error) {
-        console.log('Error occurred. Error code: ' + error.code);
-        // error.code can be:
-        //   0: unknown error
-        //   1: permission denied
-        //   2: position unavailable (error response from location provider)
-        //   3: timed out
-        return false;
-    };
-    return navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+$('.add-button').on('click', function(e) {
+    e.preventDefault();
+    getUserPosition(function(loc) {
+        getCoordinates(
+            {lng: loc.coords.longitude, lat: loc.coords.latitude},
+            createPollution);
+    }, function(e) {
+        console.log(e);
+        Materialize.toast('Sorry, we cannot get your current location. :(', 
+            4000);
+    });
+    // createPollution();
+});
+
+function getUserPosition(success, error) {
+    return navigator.geolocation.getCurrentPosition(success, error);
 }
 
-function getCoordinates(address) {
-  geocoder.geocode({'address': address}, function(results, status) {
-      if (status === 'OK') {
-          return results[0].geometry.location;
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
-      });
+    }
+    return cookieValue;
+}
+
+$(document).on('click', '#approve-btn', function(e) {
+    e.preventDefault();
+    var elem = $(this);
+    $.ajax({
+        beforeSend: function(xhr, settings) {
+            var csrftoken = getCookie('csrftoken');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        },
+        type: 'POST',
+        url: elem.data('url'),
+        data: {'pk': elem.data('id')},
+        success: function(response) {
+            response = JSON.parse(response);
+            if (response.update) {
+                $('#approve-count').text(response.count.toString().concat(' people verified this.'));
+            }
+        },
+        error: function(xhr, type) {
+            console.log('an unexpected error occured while approving');
+        }
+    });
+});
+
+function getCoordinates(location, callback) {
+    Geocoder.geocode({'location': location}, function(results, status) {
+      if (status === 'OK') {
+            location.address = results[1].formatted_address;
+            return callback(location);
+        } else {
+            Materialize.toast('Sorry, the geocoder failed. :(', 4000)
+        }
+    });
 }
 
 // FOR THE IMAGES MODAL-CAROUSEL

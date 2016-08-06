@@ -1,0 +1,36 @@
+<div id="create-pollution" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h5>Report Pollution</h5>
+        <form action="{% url 'upload-image' %}" method="POST" enctype="multipart/form-data" id="image-form">
+            {% csrf_token %}
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Upload Image</span>
+                    <input type="file" name="image_file" accept="image/*">
+                </div>
+                <!-- <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div> -->
+            </div>
+        </form>
+        <form id="pollution-form" method="post" action="{% url 'create-pollution' %}">
+            {% csrf_token %}
+            <input type="hidden" name="image_pks" value="[]">
+            <input type="hidden" name="address" value="">
+            <input type="hidden" name="long">
+            <input type="hidden" name="lat">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea class="materialize-textarea" name="description"></textarea>
+                    <label for="textarea1">Description</label>
+                </div>
+            </div>
+        </form>
+        <div class="uploaded-images">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat submit">Submit</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+    </div>
+</div>
