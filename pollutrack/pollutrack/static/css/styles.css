@@ -29,11 +29,13 @@ li {
 .address {
     font-size: 18px;
     font-weight: bold;
+    width: 240px;
 }
 
 .italic {
     font-size: 12px;
     font-style: italic;
+    width: 240px;
 }
 
 .side-menu {
