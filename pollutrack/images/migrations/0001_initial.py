@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('image_file', models.ImageField(upload_to=b'uploaded_images')),
                 ('description', models.TextField(blank=True)),
+                ('when', models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

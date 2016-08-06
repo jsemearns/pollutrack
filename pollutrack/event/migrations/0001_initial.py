@@ -8,8 +8,8 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pollution', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('pollution', '0001_initial'),
         ('images', '0001_initial'),
     ]
 
@@ -28,11 +28,11 @@ class Migration(migrations.Migration):
                 ('approval', models.IntegerField(default=0, choices=[(0, b'Pending'), (1, b'Live'), (2, b'Rejected')])),
                 ('when', models.DateTimeField(auto_now_add=True)),
                 ('meetup_address', models.TextField(blank=True)),
-                ('after_images', models.ManyToManyField(related_name='events_after', to='images.ImageUploads')),
-                ('before_images', models.ManyToManyField(related_name='events_before', to='images.ImageUploads')),
+                ('after_images', models.ManyToManyField(related_name='events_after', to='images.ImageUploads', blank=True)),
+                ('before_images', models.ManyToManyField(related_name='events_before', to='images.ImageUploads', blank=True)),
                 ('owner', models.ForeignKey(related_name='events', to=settings.AUTH_USER_MODEL)),
                 ('pollution_source', models.ManyToManyField(related_name='events', to='pollution.PollutionSource')),
-                ('volunteers', models.ManyToManyField(related_name='joined_events', to=settings.AUTH_USER_MODEL)),
+                ('volunteers', models.ManyToManyField(related_name='joined_events', to=settings.AUTH_USER_MODEL, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=150)),
                 ('description', models.TextField(blank=True)),
                 ('event', models.ForeignKey(related_name='freebies', to='event.Event')),
-                ('images', models.ManyToManyField(related_name='freebies', to='images.ImageUploads')),
+                ('images', models.ManyToManyField(related_name='freebies', to='images.ImageUploads', blank=True)),
             ],
         ),
     ]

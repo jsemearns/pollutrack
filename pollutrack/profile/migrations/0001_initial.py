@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('images', '0001_initial'),
     ]
 
     operations = [
@@ -17,9 +18,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('user_type', models.IntegerField(default=0, choices=[(0, b'Volunteer'), (1, b'Company'), (2, b'Organization')])),
-                ('profile_image', models.ImageField(upload_to=b'profile/image', blank=True)),
-                ('cover_image', models.ImageField(upload_to=b'profile/cover', blank=True)),
+                ('cover_image', models.ForeignKey(related_name='profile_cover', blank=True, to='images.ImageUploads', null=True)),
                 ('owner', models.OneToOneField(related_name='profile', to=settings.AUTH_USER_MODEL)),
+                ('profile_image', models.ForeignKey(related_name='profile', blank=True, to='images.ImageUploads', null=True)),
             ],
         ),
     ]
