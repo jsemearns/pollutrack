@@ -12,12 +12,25 @@
     <body>
         <div id="map"></div>
 
+        <!-- MENU BUTTON -->
+        <div class="box">
+            <a href="#" class="btn-flat btn-large show-list button-collapse" data-activates="list-slide">
+                <i class="material-icons no-margin">menu</i>
+            </a>
+        </div>
+
         <!-- TEMPLATE FOR LIST -->
-        <div class="side-menu z-depth-3 fixed">
+        <div id="list-slide" class="side-menu z-depth-3 side-nav fixed">
+            <div class="close">
+                <a class="no-padding close-list" href="#" data-activates="list-slide">
+                    <i class="material-icons no-margin">close</i>
+                </a>
+            </div>
             <div class="logo"></div>
             <ul class="collection pollution-list">
                 {% include 'mustache/pollution_list.mst' %}
             </ul>
+            <div class="footer"></div>
         </div>
 
         <!-- TEMPLATE FOR DETAIL -->
@@ -25,6 +38,11 @@
             {% include 'mustache/pollution_detail.mst' %}
         </div>
         <a href="#" data-activates="detail-slide" class="show-detail hidden"></a>
+
+        <!-- ADD BUTTON -->
+        <div class="circle red add-button">
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons no-margin">add</i></a>
+        </div>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
