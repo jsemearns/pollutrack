@@ -3,6 +3,7 @@ import json
 from django.views.generic import View, TemplateView
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 from pollution.models import PollutionSource
 from pollution.forms import PollutionSourceForm
@@ -50,6 +51,7 @@ class GetPollutionSources(View):
         if report:
             center = report.center;
             result = {
+                'pk': report.pk,
                 'first_image_url': report.image_url,
                 'image_urls': report.image_urls,
                 'after_image_urls': report.after_image_urls,
@@ -64,8 +66,8 @@ class GetPollutionSources(View):
                     'profile_image_url':
                     report.owner.profile.profile_image_url,
                 },
-                'when': report.when.strftime('%b %d, %Y')
-
+                'when': report.when.strftime('%b %d, %Y'),
+                'approve_url': report.approve_url
             }
             return HttpResponse(json.dumps(result))
         else:
@@ -92,3 +94,23 @@ class CreatePollutionSource(TemplateView):
                 pol.images.add(*image_pks)
             return HttpResponse()
         return HttpResponse('form error', status=403)
+
+
+class AddApproval(View):
+    model = PollutionSource
+
+    def post(self, request):
+        if request.is_ajax():
+            print 'here'
+            pk = self.request.POST.get('pk', None)
+            response = {}
+            response['update'] = False
+            if pk:
+                user = self.request.user
+                source = self.model.objects.get(pk=pk)
+                if not source.user_approved.filter(pk=user.pk).exists():
+                    source.user_approved.add(user)
+                    response['count'] = source.user_approved.count()
+                    response['update'] = True
+            return HttpResponse(json.dumps(response))
+        return HttpResponse(status=403)

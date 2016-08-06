@@ -80,6 +80,45 @@ $('.pollution-list').on('click', 'li.collection-item', function(e) {
     showPollutionInfo(elem.data('pk'));
 });
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+$(document).on('click', '#approve-btn', function(e) {
+    e.preventDefault();
+    var elem = $(this);
+    $.ajax({
+        beforeSend: function(xhr, settings) {
+            var csrftoken = getCookie('csrftoken');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        },
+        type: 'POST',
+        url: elem.data('url'),
+        data: {'pk': elem.data('id')},
+        success: function(response) {
+            response = JSON.parse(response);
+            if (response.update) {
+                $('#approve-count').text(response.count.toString().concat(' people verified this.'));
+            }
+        },
+        error: function(xhr, type) {
+            console.log('an unexpected error occured while approving');
+        }
+    });
+});
+
 function getUserPosition() {
     var startPos;
     var geoSuccess = function(position) {

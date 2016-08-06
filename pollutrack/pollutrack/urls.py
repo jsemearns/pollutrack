@@ -32,6 +32,9 @@ urlpatterns = [
     url(r'^pollution/create/$',
         poll_views.CreatePollutionSource.as_view(),
         name='create-pollution'),
+    url(r'^pollution/approve/$',
+        poll_views.AddApproval.as_view(),
+        name='approve-pollution'),
 
     url(r'^images/upload/$',
         image_views.UploadImage.as_view(),

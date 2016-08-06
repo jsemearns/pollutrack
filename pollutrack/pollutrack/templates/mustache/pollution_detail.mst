@@ -14,8 +14,8 @@
             <i class="material-icons">today</i>
             <span>{{ when }}</span></div>
         <div class="with-icon">
-            <i class="material-icons">thumb_up</i>
-            <span>{{ approve_count }} people verified this.</span>
+            <button id="approve-btn" data-id={{ pk }} data-url={{ approve_url }}><i class="material-icons" >thumb_up</i></button>
+            <span id="approve-count">{{ approve_count }} people verified this.</span>
         </div>
         <div class="divider"></div>
         <p class="">
