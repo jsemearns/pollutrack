@@ -1,3 +1,4 @@
 *.pyc
+pt/
 *.sqlite3
 */storage/*

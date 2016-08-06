@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profile',
+    'pollutrack',
     'images',
     'event',
+    'pollution',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -122,6 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = './storage/'
 
 try:
     from local_settings import *
