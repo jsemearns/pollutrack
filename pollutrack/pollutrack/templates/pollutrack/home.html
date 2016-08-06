@@ -15,32 +15,7 @@
         <!-- TEMPLATE FOR LIST -->
         <div class="side-menu z-depth-3 fixed">
             <ul class="collection pollution-list">
-                <li class="collection-item">
-                    <div class="banner" style="background-image: url(https://upload.wikimedia.org/wikipedia/en/b/b1/Olympic_Rings.svg)"></div>
-                    <div class="details">
-                        <div class="address">Banilad, Cebu</div>
-                        <div class="italic">88 people approved this.</div>
-                        <div class="marker">
-                            <a href="#">
-                                <i class="material-icons">location_on</i>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="collection-item">
-                    <div class="banner" style="background-image: url(https://s-media-cache-ak0.pinimg.com/564x/55/c1/53/55c153bd182ae6d7cba83fa6e21a2983.jpg)"></div>
-                    <div class="details">
-                        <div class="address">Banilad, Cebu</div>
-                        <div class="italic">88 people approved this.</div>
-                        <div class="marker">
-                            <a href="#">
-                                <i class="material-icons">location_on</i>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
+                {% include 'mustache/pollution_list.mst' %}
             </ul>
         </div>
 
