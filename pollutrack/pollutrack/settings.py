@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profile',
     'images',
+    'pollution',
 ]
 
 MIDDLEWARE_CLASSES = [
