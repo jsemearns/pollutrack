@@ -11,7 +11,7 @@ EVENT_APPROVAL = ((0, 'Pending'), (1, 'Live'), (2, 'Rejected'))
 
 class Event(models.Model):
     owner = models.ForeignKey(User, related_name='events')
-    pollution_source = models.ForeignKey(
+    pollution_source = models.ManyToManyField(
         PollutionSource, related_name='events')
     description = models.TextField(blank=True)
     slogan = models.CharField(max_length=150, blank=True)
@@ -21,12 +21,14 @@ class Event(models.Model):
     donation_gathered = models.FloatField(default=0)
     status = models.IntegerField(choices=EVENT_STATUS, default=0)
     approval = models.IntegerField(choices=EVENT_APPROVAL, default=0)
-    volunteers = models.ManyToManyField(User, related_name='joined_events')
+    volunteers = models.ManyToManyField(
+        User, related_name='joined_events', blank=True)
     before_images = models.ManyToManyField(
-        ImageUploads, related_name='events_before')
+        ImageUploads, related_name='events_before', blank=True)
     after_images = models.ManyToManyField(
-        ImageUploads, related_name='events_after')
+        ImageUploads, related_name='events_after', blank=True)
     when = models.DateTimeField(auto_now_add=True)
+    meetup_address = models.TextField(blank=True)
 
     class Meta:
         app_label = 'event'
@@ -36,4 +38,8 @@ class Freebie(models.Model):
     event = models.ForeignKey(Event, related_name='freebies')
     title = models.CharField(max_length=150)
     description = models.TextField(blank=True)
-    images = models.ManyToManyField(ImageUploads, related_name='freebies')
+    images = models.ManyToManyField(
+        ImageUploads, related_name='freebies', blank=True)
+
+    class Meta:
+        app_label = 'event'
