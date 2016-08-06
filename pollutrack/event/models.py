@@ -11,7 +11,7 @@ EVENT_APPROVAL = ((0, 'Pending'), (1, 'Live'), (2, 'Rejected'))
 
 class Event(models.Model):
     owner = models.ForeignKey(User, related_name='events')
-    pollution_source = models.ForeignKey(
+    pollution_source = models.ManyToManyField(
         PollutionSource, related_name='events')
     description = models.TextField(blank=True)
     slogan = models.CharField(max_length=150, blank=True)
@@ -27,6 +27,7 @@ class Event(models.Model):
     after_images = models.ManyToManyField(
         ImageUploads, related_name='events_after')
     when = models.DateTimeField(auto_now_add=True)
+    meetup_address = models.TextField(blank=True)
 
     class Meta:
         app_label = 'event'
@@ -37,3 +38,6 @@ class Freebie(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField(blank=True)
     images = models.ManyToManyField(ImageUploads, related_name='freebies')
+
+    class Meta:
+        app_label = 'event'

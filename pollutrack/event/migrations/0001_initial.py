@@ -8,8 +8,8 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('pollution', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('pollution', '0002_pollutionsource_is_verified'),
         ('images', '0001_initial'),
     ]
 
@@ -27,10 +27,11 @@ class Migration(migrations.Migration):
                 ('status', models.IntegerField(default=0, choices=[(0, b'Open'), (1, b'Ongoing'), (2, b'Done')])),
                 ('approval', models.IntegerField(default=0, choices=[(0, b'Pending'), (1, b'Live'), (2, b'Rejected')])),
                 ('when', models.DateTimeField(auto_now_add=True)),
+                ('meetup_address', models.TextField(blank=True)),
                 ('after_images', models.ManyToManyField(related_name='events_after', to='images.ImageUploads')),
                 ('before_images', models.ManyToManyField(related_name='events_before', to='images.ImageUploads')),
                 ('owner', models.ForeignKey(related_name='events', to=settings.AUTH_USER_MODEL)),
-                ('pollution_source', models.ForeignKey(related_name='events', to='pollution.PollutionSource')),
+                ('pollution_source', models.ManyToManyField(related_name='events', to='pollution.PollutionSource')),
                 ('volunteers', models.ManyToManyField(related_name='joined_events', to=settings.AUTH_USER_MODEL)),
             ],
         ),

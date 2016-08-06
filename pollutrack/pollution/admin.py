@@ -1,8 +1,11 @@
 from django.contrib import admin
-from pollution.models import Coordinates, PollutionSource, Victim, Disease
+from pollution.models import Coordinates, PollutionSource
 
-# Register your models here.
+
+class PollutionAdmin(admin.ModelAdmin):
+    model = PollutionSource
+    list_display = ('address', 'owner',)
+
+
 admin.site.register(Coordinates)
-admin.site.register(PollutionSource)
-admin.site.register(Victim)
-admin.site.register(Disease)
+admin.site.register(PollutionSource, PollutionAdmin)

@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 from images.models import ImageUploads
 
 
@@ -10,31 +12,16 @@ class Coordinates(models.Model):
     class Meta:
         app_label = 'pollution'
 
+
 class PollutionSource(models.Model):
-    radius = models.FloatField(blank=True, null=True)
-    severity = models.IntegerField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    owner = models.ForeignKey(User, related_name='pollution_reports')
+    description = models.TextField(blank=True)
     center = models.OneToOneField(Coordinates, related_name='source')
-    victim_count = models.PositiveIntegerField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)
-
-    class Meta:
-        app_label = 'pollution'
-
-
-class Victim(models.Model):
-    pollution = models.ForeignKey(PollutionSource, related_name='victims')
     images = models.ManyToManyField(ImageUploads)
-
-    class Meta:
-        app_label = 'pollution'
-
-
-class Disease(models.Model):
-    name = models.CharField(max_length=30, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    pollution = models.ManyToManyField(PollutionSource)
-    images = models.ManyToManyField(ImageUploads)
+    address = models.TextField(blank=True)
+    when = models.DateTimeField(auto_now_add=True)
+    user_approved = models.ManyToManyField(User, related_name='approved_posts')
 
     class Meta:
         app_label = 'pollution'
