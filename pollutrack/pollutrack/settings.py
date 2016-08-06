@@ -128,11 +128,8 @@ try:
     from local_settings import *
 except:
     pass
-<<<<<<< HEAD
-=======
 
 PROFILE_IMAGE_UPLOAD_PATH = 'profile/image'
 PROFILE_COVER_UPLOAD_PATH = 'profile/cover'
 
 IMAGE_UPLOAD_PATH = 'uploaded_images'
->>>>>>> 424d3cc092a6be1cda52f7e0a9f1965fdb711d1a
