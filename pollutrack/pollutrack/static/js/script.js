@@ -141,6 +141,7 @@ $('.add-button').on('click', function(e) {
             {lng: loc.coords.longitude, lat: loc.coords.latitude},
             createPollution);
     }, function(e) {
+        console.log(e);
         Materialize.toast('Sorry, we cannot get your current location. :(', 
             4000);
     });
@@ -152,7 +153,6 @@ function getUserPosition(success, error) {
 }
 
 function getCoordinates(location, callback) {
-    console.log(location)
     Geocoder.geocode({'location': location}, function(results, status) {
       if (status === 'OK') {
             location.address = results[1].formatted_address;
