@@ -33,6 +33,20 @@ class Event(models.Model):
     class Meta:
         app_label = 'event'
 
+    @property
+    def before_images_urls(self):
+        urls = []
+        for image in self.before_images.all():
+            urls.append(image.url)
+        return urls
+
+    @property
+    def after_images_urls(self):
+        urls = []
+        for image in self.after_images.all():
+            urls.append(image.url)
+        return urls
+
 
 class Freebie(models.Model):
     event = models.ForeignKey(Event, related_name='freebies')
@@ -43,3 +57,10 @@ class Freebie(models.Model):
 
     class Meta:
         app_label = 'event'
+
+    @property
+    def image_urls(self):
+        urls = []
+        for image in self.images.all():
+            urls.append(image.url)
+        return urls
