@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'profile',
     'pollutrack',
     'images',
+    'event',
     'pollution',
 ]
 
