@@ -62,3 +62,10 @@ $('.show-detail').sideNav({
     edge: 'left',
     closeOnClick: false,
 });
+
+$('.pollution-list').on('click', 'li.collection-item', function(e) {
+    e.preventDefault();
+    var elem = $(this);
+    MAP.setCenter(new google.maps.LatLng(elem.data('lat'), elem.data('long')));
+    showPollutionInfo(elem.data('pk'));
+});
