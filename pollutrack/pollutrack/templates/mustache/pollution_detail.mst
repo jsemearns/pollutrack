@@ -26,6 +26,7 @@
         <p class="">
             {{ description }}
         </p>
+        <a class="waves-effect waves-light btn blue">Join a Cause</a>
     </div>
     <div class="footer"></div>
 </script>
