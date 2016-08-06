@@ -17,12 +17,23 @@ li {
     display: none;
 }
 
+.address {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.italic {
+    font-size: 12px;
+    font-style: italic;
+}
+
 .side-menu {
     z-index: 2;
     position: fixed;
     width: 320px;
     background: #fff;
     height: 100vh;
+    overflow: auto;
 }
 
 .over {
@@ -41,8 +52,24 @@ li {
     background-position: center;
 }
 
+.banner {
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .details {
+    position: relative;
     margin: 5px;
+}
+
+.marker {
+    position: absolute;
+    top: 5px;
+    right: 0px;
 }
 
 .material-icons {
@@ -52,4 +79,17 @@ li {
 
 .with-icon span {
     vertical-align: 4px;
+}
+
+.pollution-list {
+    margin: 0px;
+}
+
+.pollution-list .collection-item {
+    padding: 0px;
+    cursor: pointer;
+}
+
+.pollution-list .collection-item:hover {
+    background-color: #eee;
 }
