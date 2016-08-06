@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from images.models import ImageUploads
 from images.forms import ImageForm
 
+from core.views.mixins import LoginRequiredMixin
 
-class UploadImage(TemplateView):
+
+class UploadImage(LoginRequiredMixin, TemplateView):
     template_name = 'images/upload.html'
     form_class = ImageForm
 

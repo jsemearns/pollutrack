@@ -22,7 +22,7 @@ class Profile(models.Model):
         return ''
 
     @property
-    def profile_image_url(self):
+    def cover_image_url(self):
         if self.cover_image:
             return self.cover_image.url
         return ''
