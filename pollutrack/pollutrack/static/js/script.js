@@ -63,6 +63,14 @@ $('.show-detail').sideNav({
     closeOnClick: false,
 });
 
+$('.show-list').sideNav({
+    menuWidth: 320,
+    edge: 'left',
+    closeOnClick: true,
+});
+
+$('.close-list').sideNav('hide');
+
 $('.pollution-list').on('click', 'li.collection-item', function(e) {
     e.preventDefault();
     var elem = $(this);

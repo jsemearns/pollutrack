@@ -40,7 +40,6 @@ li {
 
 .side-menu {
     z-index: 2;
-    position: fixed;
     width: 320px;
     background: #fff;
     height: 100vh;
@@ -107,4 +106,43 @@ li {
 
 .pollution-list .collection-item:hover {
     background-color: #eee;
+}
+
+.add-button {
+    position: absolute;
+    z-index: 2;
+    bottom: 30px;
+    right: 30px;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.footer {
+    height: 100px;
+}
+
+.box {
+    position: relative;
+    z-index: 2;
+}
+
+.box a {
+    color: #333;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+}
+
+@media (min-width: 993px) {
+    .close {
+        display: none;
+    }
 }
