@@ -17,6 +17,15 @@ li {
     display: none;
 }
 
+.logo {
+    background-image: url('../images/pollutrack.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 150px;
+}
+
 .address {
     font-size: 18px;
     font-weight: bold;
@@ -33,7 +42,8 @@ li {
     width: 320px;
     background: #fff;
     height: 100vh;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .over {
@@ -83,11 +93,14 @@ li {
 
 .pollution-list {
     margin: 0px;
+    padding: 7px;
+    border: none;
 }
 
 .pollution-list .collection-item {
     padding: 0px;
     cursor: pointer;
+    margin-bottom: 8px;
 }
 
 .pollution-list .collection-item:hover {
