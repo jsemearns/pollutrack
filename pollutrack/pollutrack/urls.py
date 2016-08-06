@@ -25,10 +25,17 @@ from images import views as image_views
 
 urlpatterns = [
     url(r'^$', views.HomePage.as_view()),
-    url(r'^pollution/list/$', poll_views.ListPollutionSources.as_view()),
-    url(r'^pollution/get/$', poll_views.GetPollutionSources.as_view()),
+    url(r'^pollution/list/$',
+        poll_views.ListPollutionSources.as_view()),
+    url(r'^pollution/get/$',
+        poll_views.GetPollutionSources.as_view()),
+    url(r'^pollution/create/$',
+        poll_views.CreatePollutionSource.as_view(),
+        name='create-pollution'),
 
-    url(r'^images/upload/$', image_views.UploadImage.as_view(),
+    url(r'^images/upload/$',
+        image_views.UploadImage.as_view(),
         name='upload-image'),
+
     url(r'^admin/', admin.site.urls)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

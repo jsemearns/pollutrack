@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form method="POST" action="{% url 'create-pollution' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Submit</button>
+</form>
+</body>
+</html>
