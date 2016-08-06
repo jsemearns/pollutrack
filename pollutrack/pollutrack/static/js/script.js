@@ -1,13 +1,13 @@
 var MAP;
+var Geocoder;
 var marker = {
     position: {lat: 10.3267959, lng: 123.9108368}
 };
-var Geocoder = new google.maps.Geocoder();
 
 var templates = {
     pollutionDetail: $('#pollution-detail-template').html(),
     pollutionList: $('#pollution-list-template').html(),
-}
+};
 
 function initMap() {
     var mapDiv = document.getElementById('map');
@@ -17,6 +17,7 @@ function initMap() {
         zoom: 12,
     });
 
+    Geocoder = new google.maps.Geocoder();
     fetchPollutions();
 }
 
@@ -24,7 +25,7 @@ function addMarker(source) {
     source.map = MAP;
     var marker = new google.maps.Marker(source);
     marker.addListener('click', function() {
-        showPollutionInfo(this.pk)
+        showPollutionInfo(this.pk);
     });
 }
 
@@ -42,7 +43,7 @@ function fetchPollutions() {
             var loc = pollutions[i];
             addMarker({position: {lat: loc.lat, lng: loc.long},
                        pk: loc.pk});
-            var t = Mustache.render(templates.pollutionList, loc)
+            var t = Mustache.render(templates.pollutionList, loc);
             listContainer.append(t);
         }
     });
@@ -83,7 +84,7 @@ function getUserPosition() {
     var startPos;
     var geoSuccess = function(position) {
         startPos = position;
-        return { 'lng': startPos.coords.longitude, 'lat': startPos.coords.latitude }
+        return { 'lng': startPos.coords.longitude, 'lat': startPos.coords.latitude };
     };
     var geoError = function(error) {
         console.log('Error occurred. Error code: ' + error.code);
@@ -106,3 +107,9 @@ function getCoordinates(address) {
         }
       });
 }
+
+// FOR THE IMAGES MODAL-CAROUSEL
+$('#detail-slide').on('click', '.detail-image', function() {
+    $('#images-modal').openModal();
+    $('.carousel').carousel();
+});

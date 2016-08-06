@@ -17,6 +17,13 @@ li {
     display: none;
 }
 
+#images-modal {
+    padding: 0px;
+    max-height: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
 .logo {
     background-image: url('../images/pollutrack.png');
     background-size: cover;
@@ -61,6 +68,7 @@ li {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: zoom-in;
 }
 
 .banner {
