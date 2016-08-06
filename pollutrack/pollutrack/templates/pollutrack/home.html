@@ -4,14 +4,46 @@
 <html>
     <head>
         <title>PolluTrack</title>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
         <div id="map"></div>
 
-        <script src="{% static 'js/script.js' %}"></script>
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQqjDYm9kO9NJLapj7URhEb4HvZW07WUI&callback=initMap">
+        <!-- TEMPLATE FOR LIST -->
+        <div class="side-menu z-depth-3 fixed">
+            <ul class="collection">
+                <li class="collection-item avatar">
+                  <i class="material-icons circle">folder</i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#" class="secondary-content">
+                      <i class="material-icons red-front">location_on</i>
+                  </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- TEMPLATE FOR DETAIL -->
+        <div id="detail-slide" class="side-nav">
+            <div class="background detail-image" style="background-image: url(https://upload.wikimedia.org/wikipedia/en/b/b1/Olympic_Rings.svg)"></div>
+
+            <a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a>
+            <a href="#!">Second Link</a>
+            <div class="divider"></div>
+            <a class="subheader">Subheader</a>
+            <a class="waves-effect" href="#!">Third Link With Waves</a>
+        </div>
+        <a href="#" data-activates="detail-slide" class="show-detail hidden"></a>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQqjDYm9kO9NJLapj7URhEb4HvZW07WUI&callback=initMap">
         </script>
+        <script src="{% static 'js/script.js' %}"></script>
     </body>
 </html>
