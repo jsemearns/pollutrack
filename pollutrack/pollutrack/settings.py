@@ -136,3 +136,5 @@ PROFILE_IMAGE_UPLOAD_PATH = 'profile/image'
 PROFILE_COVER_UPLOAD_PATH = 'profile/cover'
 
 IMAGE_UPLOAD_PATH = 'uploaded_images'
+
+LOGIN_URL = '/'
