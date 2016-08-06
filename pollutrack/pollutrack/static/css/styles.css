@@ -113,6 +113,22 @@ li {
     vertical-align: 4px;
 }
 
+/*.with-icon i.person {
+    color: #2962FF;
+}
+
+.with-icon i.location {
+    color: #DD2C00;
+}
+
+.with-icon i.date {
+    color: #7E57C2;
+}
+
+.with-icon i.thumb {
+    color: #EC407A;
+}*/
+
 .pollution-list {
     margin: 0px;
     padding: 7px;
