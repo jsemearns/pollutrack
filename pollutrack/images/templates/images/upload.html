@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form method="POST" action="{% url 'upload-image' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image_file" accept="image/*">
+    <button>Submit</button>
+</form>
+</body>
+</html>
