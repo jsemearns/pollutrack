@@ -75,6 +75,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pollutrack.wsgi.application'
 
 MEDIA_ROOT = 'storage/'
+MEDIA_URL = 'storage/'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
