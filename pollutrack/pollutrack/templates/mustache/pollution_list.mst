@@ -4,7 +4,7 @@
         <div class="banner" style="background-image: url({{ image_url }})"></div>
         <div class="details">
             <div class="address">{{ address }}</div>
-            <div class="italic">{{ approve_count }} people approved this.</div>
+            <div class="italic">{{ approve_count }} people verified this.</div>
             <div class="marker">
                 <a href="#">
                     <i class="material-icons">location_on</i>
