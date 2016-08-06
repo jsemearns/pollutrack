@@ -7,7 +7,8 @@ function initMap() {
     var mapDiv = document.getElementById('map');
     MAP = new google.maps.Map(mapDiv, {
         center: {lat: 10.3267959, lng: 123.9108368},
-        zoom: 10
+        disableDefaultUI: true,
+        zoom: 10,
     });
 
     addAllMarkers([marker]);
@@ -18,6 +19,11 @@ function addMarker(source) {
         position: source.position,
         map: MAP
     });
+    marker.addListener('click', function() {
+        $('.show-detail').sideNav('hide');
+        // render then callback show
+        $('.show-detail').sideNav('show');
+    });
 }
 
 function addAllMarkers(sources) {
@@ -25,3 +31,9 @@ function addAllMarkers(sources) {
         addMarker(sources[i]);
     }
 }
+
+$('.show-detail').sideNav({
+    menuWidth: 320,
+    edge: 'left',
+    closeOnClick: false,
+});
