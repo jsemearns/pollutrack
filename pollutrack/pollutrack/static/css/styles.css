@@ -54,6 +54,19 @@ li {
     overflow-x: hidden;
 }
 
+.side-menu .marker a {
+    margin: 0px;
+    padding: 0px;
+}
+
+.side-menu .marker a:hover {
+    background: none;
+}
+
+.side-menu .marker i {
+    color: #DD2C00;
+}
+
 .over {
     z-index: 2;
     position: fixed;
@@ -100,6 +113,22 @@ li {
     vertical-align: 4px;
 }
 
+/*.with-icon i.person {
+    color: #2962FF;
+}
+
+.with-icon i.location {
+    color: #DD2C00;
+}
+
+.with-icon i.date {
+    color: #7E57C2;
+}
+
+.with-icon i.thumb {
+    color: #EC407A;
+}*/
+
 .pollution-list {
     margin: 0px;
     padding: 7px;
@@ -144,9 +173,23 @@ li {
     color: #333;
 }
 
-.close {
+.close, .close2 {
     position: absolute;
     right: 10px;
+}
+
+.close2 {
+    top: 10px;
+}
+
+.close2 a {
+    height: 24px;
+    line-height: 24px;
+    background-color: rgba(255, 255, 255, 0.8)
+}
+
+.close2 a:hover {
+    background-color: rgba(255, 255, 255, 0.9)
 }
 
 @media (min-width: 993px) {

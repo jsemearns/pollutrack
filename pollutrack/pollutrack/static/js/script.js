@@ -62,8 +62,10 @@ function showPollutionInfo(id) {
 $('.show-detail').sideNav({
     menuWidth: 320,
     edge: 'left',
-    closeOnClick: false,
+    closeOnClick: true,
 });
+
+$('.close-detail').sideNav('hide');
 
 $('.show-list').sideNav({
     menuWidth: 320,
