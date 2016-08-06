@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profile',
+    'images',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -71,10 +72,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pollutrack.wsgi.application'
 
 MEDIA_ROOT = 'storage/'
-
-PROFILE_IMAGE_UPLOAD_PATH = 'profile/image'
-PROFILE_COVER_UPLOAD_PATH = 'profile/cover'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -129,3 +126,8 @@ try:
     from local_settings import *
 except:
     pass
+
+PROFILE_IMAGE_UPLOAD_PATH = 'profile/image'
+PROFILE_COVER_UPLOAD_PATH = 'profile/cover'
+
+IMAGE_UPLOAD_PATH = 'uploaded_images'
