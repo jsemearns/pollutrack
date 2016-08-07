@@ -17,13 +17,6 @@ li {
     display: none;
 }
 
-#images-modal {
-    padding: 0px;
-    max-height: none;
-    background-color: transparent;
-    box-shadow: none;
-}
-
 .logo {
     background-image: url('../images/pollutrack.png');
     background-size: cover;
@@ -192,13 +185,6 @@ li {
     background-color: rgba(255, 255, 255, 0.9)
 }
 
-@media (min-width: 993px) {
-    .close {
-        display: none;
-    }
-}
-
-
 .uploaded-images img {
     display: inline-block;
     max-width: 200px;
@@ -213,4 +199,39 @@ li {
 
 .hidden {
     display: none;
+}
+
+#images-modal-list img {
+    display: inline-block;
+    width: 45%;
+}
+
+#images-modal {
+    /*padding: 0px;
+    max-height: none;
+    background-color: transparent;
+    box-shadow: none;*/
+}
+
+#images-modal-list .material-placeholder {
+    display: inline;
+    margin-right: 5px;
+}
+
+
+@media (min-width: 993px) {
+    .close {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    #images-modal-list .material-placeholder {
+        display: inline-block;
+    }
+
+    #images-modal-list img {
+        display: inline-block;
+        width: 100%;
+    }
 }

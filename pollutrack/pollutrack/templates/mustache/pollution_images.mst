@@ -1,7 +1,7 @@
 {% verbatim %}
 <script id="pollution-images-template" type="x-tmpl-mustache">
     {{#image_urls}}
-        <a class="carousel-item" href="#hi!"><img src="{{ . }}"></a>
+        <img class="materialboxed" src="{{ . }}">
     {{/image_urls}}
 </script>
 {% endverbatim %}

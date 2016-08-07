@@ -57,8 +57,8 @@ function showPollutionInfo(id) {
     $.get('/pollution/get/?pk=' + id, function(data) {
         var pollution = JSON.parse(data);
         var t = Mustache.render(templates.pollutionDetail, pollution);
-        $('.carousel').removeClass('initialized');
-        $('.carousel').html(Mustache.render(templates.imagesCarousel, pollution));
+        var rendered = Mustache.render(templates.imagesCarousel, pollution);
+        $('#images-modal-list').html(rendered);
         $('.show-detail').sideNav('hide');
         $('#detail-slide').html(t);
         $('.show-detail').sideNav('show');
@@ -146,7 +146,6 @@ $('.add-button').on('click', function(e) {
             {lng: loc.coords.longitude, lat: loc.coords.latitude},
             createPollution);
     }, function(e) {
-        console.log(e);
         Materialize.toast('Sorry, we cannot get your current location. :(',
             4000);
     });
@@ -212,5 +211,5 @@ function getCoordinates(location, callback) {
 // FOR THE IMAGES MODAL-CAROUSEL
 $('#detail-slide').on('click', '.detail-image', function() {
     $('#images-modal').openModal();
-    $('.carousel').carousel();
+    $('.materialboxed').materialbox();
 });
