@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('pollution', '0002_pollutionsource_is_verified'),
         ('images', '0001_initial'),
     ]
 
@@ -29,6 +30,7 @@ class Migration(migrations.Migration):
                 ('after_images', models.ManyToManyField(related_name='events_after', to='images.ImageUploads')),
                 ('before_images', models.ManyToManyField(related_name='events_before', to='images.ImageUploads')),
                 ('owner', models.ForeignKey(related_name='events', to=settings.AUTH_USER_MODEL)),
+                ('pollution_source', models.ForeignKey(related_name='events', to='pollution.PollutionSource')),
                 ('volunteers', models.ManyToManyField(related_name='joined_events', to=settings.AUTH_USER_MODEL)),
             ],
         ),

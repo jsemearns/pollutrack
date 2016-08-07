@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from images.models import ImageUploads
+from pollution.models import PollutionSource
 
 
 EVENT_STATUS = ((0, 'Open'), (1, 'Ongoing'), (2, 'Done'))
@@ -10,6 +11,8 @@ EVENT_APPROVAL = ((0, 'Pending'), (1, 'Live'), (2, 'Rejected'))
 
 class Event(models.Model):
     owner = models.ForeignKey(User, related_name='events')
+    pollution_source = models.ForeignKey(
+        PollutionSource, related_name='events')
     description = models.TextField(blank=True)
     slogan = models.CharField(max_length=150, blank=True)
     start_date = models.DateTimeField(blank=True)
