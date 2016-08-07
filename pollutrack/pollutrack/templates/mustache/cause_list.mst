@@ -1,0 +1,13 @@
+{% verbatim %}
+<script id="cause-item-template" type="x-tmpl-mustache">
+    <li class="cause-item" data-id="{{ pk }}">
+        <div class="image" style="background-image: url({{ owner_image_url }})"></div>
+        <div class="cause-info">
+            <p><b>{{ slogan }}</b></p>
+            <p>by <b>{{ owner_name }}</b></p>
+            <p>{{ start_date }}</p>
+            <p>{{ no_of_volunteers }} volunteers</p>
+        </div>
+    </li>
+</script>
+{% endverbatim %}

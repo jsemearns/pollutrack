@@ -13,14 +13,16 @@ class ListEvents(View):
     def get(self, request):
         filters = {
             'pollution_source__pk': request.GET.get('pk', 0),
-            'status': request.GET.get('status', 0)
+            'status': request.GET.get('status', 0),
+            'approval': 1
         }
 
         top = request.GET.get('top', 0)
         bottom = request.GET.get('bottom', 30)
         result = []
 
-        events = self.model.objects.filter(**filters)[top:bottom]
+        events = self.model.objects.filter(**filters).order_by(
+            'start_date')[top:bottom]
         for event in events:
             freebie = event.freebies
             result.append({
@@ -28,8 +30,10 @@ class ListEvents(View):
                 'owner_name': event.owner.get_full_name(),
                 'slogan': event.slogan,
                 'no_of_volunteers': event.volunteers.count(),
-                'when': event.when,
+                'start_date': event.start_date.strftime('%b %d, %Y %I:%M %p'),
+                'pk': event.pk,
             })
+        print result
         return HttpResponse(json.dumps(result))
 
 

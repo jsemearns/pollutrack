@@ -22,6 +22,7 @@ from pollutrack import views
 
 from pollution import views as poll_views
 from images import views as image_views
+from event import views as event_views
 
 urlpatterns = [
     url(r'^$', views.HomePage.as_view()),
@@ -35,6 +36,9 @@ urlpatterns = [
     url(r'^pollution/approve/$',
         poll_views.AddApproval.as_view(),
         name='approve-pollution'),
+    url(r'^event/list/$',
+        event_views.ListEvents.as_view(),
+        name='event-list'),
 
     url(r'^images/upload/$',
         image_views.UploadImage.as_view(),

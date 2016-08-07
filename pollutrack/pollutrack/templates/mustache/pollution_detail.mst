@@ -29,7 +29,11 @@
         <p class="">
             {{ description }}
         </p>
-        <a class="waves-effect waves-light btn blue">Join a Cause</a>
+        <div class="divider"></div>
+        <p class="cause-label">Scheduled Causes</p>
+        <ul class="cause-container">
+            <p>no event scheduled</p>
+        </ul>
     </div>
     <div class="footer"></div>
 </script>

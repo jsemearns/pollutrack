@@ -12,6 +12,7 @@ var templates = {
     pollutionList: $('#pollution-list-template').html(),
     createForm: $('#create-pollution').html(),
     imagesCarousel: $('#pollution-images-template').html(),
+    causeItem: $('#cause-item-template').html()
 };
 
 function initMap() {
@@ -62,6 +63,7 @@ function showPollutionInfo(id) {
         $('.show-detail').sideNav('hide');
         $('#detail-slide').html(t);
         $('.show-detail').sideNav('show');
+        getEvents(id);
     });
 }
 
@@ -113,6 +115,21 @@ function createPollution(position) {
 
     $('#create-pollution .submit').on('click', function(e) {
         mainForm.trigger('submit');
+    });
+}
+
+function getEvents(pollutionId) {
+    $.get('/event/list/?pk=' + pollutionId, function(events) {
+        events = JSON.parse(events);
+        if (events.length > 0) {
+            var container = $('#detail-slide .cause-container').empty();
+        }
+        var container = $('#detail-slide .cause-container');
+        for (var i=0; i < events.length; i++) {
+            var t = Mustache.render(templates.causeItem, events[i]);
+            container.append(t);
+        }
+
     });
 }
 
