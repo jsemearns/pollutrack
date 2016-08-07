@@ -204,3 +204,13 @@ li {
     max-width: 200px;
     height: 200px;
 }
+
+.details .approve-btn {
+    padding: 0px 1rem;
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
+.hidden {
+    display: none;
+}

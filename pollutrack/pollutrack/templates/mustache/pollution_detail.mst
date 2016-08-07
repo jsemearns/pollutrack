@@ -19,8 +19,11 @@
             <i class="material-icons date">today</i>
             <span>{{ when }}</span></div>
         <div class="with-icon">
-            <button id="approve-btn" data-id={{ pk }} data-url={{ approve_url }}><i class="material-icons" >thumb_up</i></button>
+            <i class="material-icons" >thumb_up</i>
             <span id="approve-count">{{ approve_count }} people verified this.</span>
+            {{^ has_approved }}
+                <button data-id={{ pk }} data-url={{ approve_url }} class="approve-btn btn">+</button>
+            {{/ has_approved }}
         </div>
         <div class="divider"></div>
         <p class="">

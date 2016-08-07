@@ -174,7 +174,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-$(document).on('click', '#approve-btn', function(e) {
+$(document).on('click', '.approve-btn', function(e) {
     e.preventDefault();
     var elem = $(this);
     $.ajax({
@@ -190,6 +190,7 @@ $(document).on('click', '#approve-btn', function(e) {
             if (response.update) {
                 $('#approve-count').text(response.count.toString().concat(' people verified this.'));
             }
+            elem.addClass('hidden');
         },
         error: function(xhr, type) {
             console.log('an unexpected error occured while approving');

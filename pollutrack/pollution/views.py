@@ -68,8 +68,12 @@ class GetPollutionSources(View):
                     report.owner.profile.profile_image_url,
                 },
                 'when': report.when.strftime('%b %d, %Y'),
-                'approve_url': report.approve_url
+                'approve_url': report.approve_url,
+                'has_approved': True,
             }
+            if request.user.is_authenticated():
+                result['has_approved'] = report.user_approved.filter(
+                    pk=request.user.pk).exists()
             return HttpResponse(json.dumps(result))
         else:
             return HttpResponse(status=404)
