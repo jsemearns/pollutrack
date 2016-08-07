@@ -218,6 +218,36 @@ li {
     margin-right: 5px;
 }
 
+.event .thumbnail {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.event .slogan {
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: lighter;
+}
+
+.event-details {
+    margin-left: 10px;
+}
+
+.event-details .description {
+    margin-top: 10px;
+}
+
+.event-details .float-right {
+    float: right;
+    margin-top: 20px;
+}
+
+.small-details {
+    color: #888;
+}
 
 @media (min-width: 993px) {
     .close {
@@ -233,5 +263,10 @@ li {
     #images-modal-list img {
         display: inline-block;
         width: 100%;
+    }
+
+    .thumbnail {
+        width: 200px;
+        height: 200px;
     }
 }

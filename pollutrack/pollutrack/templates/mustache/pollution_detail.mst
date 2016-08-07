@@ -29,7 +29,7 @@
         <p class="">
             {{ description }}
         </p>
-        <a class="waves-effect waves-light btn blue">Join a Cause</a>
+        <a class="waves-effect waves-light btn blue join-btn">Join a Cause</a>
     </div>
     <div class="footer"></div>
 </script>

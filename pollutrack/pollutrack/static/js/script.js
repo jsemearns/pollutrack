@@ -203,13 +203,19 @@ function getCoordinates(location, callback) {
             location.address = results[1].formatted_address;
             return callback(location);
         } else {
-            Materialize.toast('Sorry, the geocoder failed. :(', 4000)
+            Materialize.toast('Sorry, the geocoder failed. :(', 4000);
         }
     });
 }
 
-// FOR THE IMAGES MODAL-CAROUSEL
+// FOR THE IMAGES MODAL
 $('#detail-slide').on('click', '.detail-image', function() {
     $('#images-modal').openModal();
     $('.materialboxed').materialbox();
+});
+
+
+// FOR OPENING EVENT MODAL
+$('#detail-slide').on('click', '.join-btn', function() {
+    $('#event-modal').openModal();
 });
